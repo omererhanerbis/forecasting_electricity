@@ -116,3 +116,19 @@ def consumption_outlier_smoother(data, outliers_data, smoothing_data):
         ]
 
     return data
+
+
+def dependent_variable_data_reducer(data, drop_list):
+    """Reduce data to dependent variable only with index.
+
+    Args:
+        data (pandas.DataFrame): The data set.
+        drop_list (list): the list of column names to drop
+
+    Returns:
+        pandas.DataFrame: The reduced dependent variable.
+
+    """
+    data = data.drop(drop_list, axis=1)
+
+    return data
