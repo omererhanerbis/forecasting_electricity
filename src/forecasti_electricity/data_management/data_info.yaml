@@ -1,15 +1,9 @@
 ---
-data_name: data.csv
-columns_to_drop:
-  - nationality
-  - ethnicity
-  - region
-  - amt_weekends
-  - amt_weekdays
-  - type
-  - gross_income
-categorical_columns: [gender, marital_status, highest_qualification, smoke]
+data_name: RealTimeConsumption-01012017-11032023.csv
+
+
+
 column_rename_mapping:
-  highest_qualification: qualification
-outcome: smoke
-outcome_numerical: smoke_numerical  # created during the clean_data step
+  Date: date
+  Hour: hour
+  Consumption (MWh): consumption
