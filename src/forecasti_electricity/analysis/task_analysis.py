@@ -12,8 +12,12 @@ from forecasti_electricity.analysis.model import (
     critical_thresholds,
     decompose_time_series_data,
     dependent_variable_data_reducer,
+    load_model,
     outlier_finder,
     weekday_mean_calculator,
+)
+from forecasti_electricity.analysis.predict import (
+    daily_naive_predictions,
 )
 from forecasti_electricity.config import BLD, SRC
 from forecasti_electricity.utilities import read_yaml
@@ -51,3 +55,18 @@ def task_fit_naive_arima_model(depends_on, produces):
     )
     model_fit = model.fit()
     model_fit.save(produces)
+
+
+@pytask.mark.depends_on(
+    {
+        "scripts": ["model.py", "predict.py"],
+        "data": BLD / "python" / "data" / "daily_data_clean.csv",
+        "model": BLD / "python" / "models" / "naive_arima_model.pickle",
+    },
+)
+@pytask.mark.produces(BLD / "python" / "predictions" / "naive_arima_predictions.csv")
+def task_predict(depends_on, produces):
+    """Forecasting the model estimates."""
+    model = load_model(depends_on["model"])
+    predicted_prob = daily_naive_predictions(model)
+    predicted_prob.to_csv(produces, index=False)
