@@ -2,6 +2,7 @@
 # Functions
 # ======================================================================================
 
+if(FALSE) {
 plot_regression_by_age <- function(data, data_info, predictions, group) {
   plot_data <- reshape2::melt(
     predictions,
@@ -64,3 +65,4 @@ predictions <- read.csv(depends_on[["predictions"]])
 
 fig <- plot_regression_by_age(data, data_info, predictions, group)
 plotly::export(fig, produces)
+}

@@ -2,6 +2,7 @@
 # Get produces and depends_on from pytask
 # ======================================================================================
 
+if(FALSE) {
 args <- commandArgs(trailingOnly = TRUE)
 path_to_yaml <- args[length(args)]
 config <- yaml::yaml.load_file(path_to_yaml)
@@ -17,3 +18,4 @@ SRC <- depends_on[["SRC"]]
 model <- readRDS(depends_on[["model"]])
 table <- xtable::xtable(model)
 print(table, file = produces, compress = FALSE)
+}

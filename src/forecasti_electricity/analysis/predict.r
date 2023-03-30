@@ -2,6 +2,7 @@
 # Functions
 # ======================================================================================
 
+if(FALSE) {
 predict_prob_by_age <- function(data, model, group) {
   age_min <- min(data[["age"]])
   age_max <- max(data[["age"]])
@@ -51,3 +52,4 @@ model <- readRDS(depends_on[["model"]])
 data <- read.csv(depends_on[["data"]])
 predicted_prob <- predict_prob_by_age(data, model, group)
 write.csv(predicted_prob, produces, row.names = FALSE)
+}

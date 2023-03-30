@@ -2,6 +2,7 @@
 # Functions
 # ======================================================================================
 
+if(FALSE) {
 clean_data <- function(data, data_info) {
   data[data_info[["columns_to_drop"]]] <- NULL
   data <- na.omit(data)
@@ -35,3 +36,4 @@ data_info <- yaml::yaml.load_file(depends_on[["data_info"]])
 data <- read.csv(depends_on[["data"]])
 data <- clean_data(data, data_info)
 write.csv(data, file = produces, row.names = FALSE)
+}

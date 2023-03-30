@@ -1,44 +1,10 @@
 """Functions for fitting the regression model."""
 
-import statsmodels.formula.api as smf
+import numpy as np
+import pandas as pd
+import scipy.stats as st
 from statsmodels.iolib.smpickle import load_pickle
-
-
-def fit_logit_model(data, data_info, model_type):
-    """Fit a logit model to data.
-
-    Args:
-        data (pandas.DataFrame): The data set.
-        data_info (dict): Information on data set stored in data_info.yaml. The
-            following keys can be accessed:
-            - 'outcome': Name of dependent variable column in data
-            - 'outcome_numerical': Name to be given to the numerical version of outcome
-            - 'columns_to_drop': Names of columns that are dropped in data cleaning step
-            - 'categorical_columns': Names of columns that are converted to categorical
-            - 'column_rename_mapping': Old and new names of columns to be renamend,
-                stored in a dictionary with design: {'old_name': 'new_name'}
-            - 'url': URL to data set
-        model_type (str): What model to build for the linear relationship of the logit
-            model. Currently implemented:
-            - 'linear': Numerical covariates enter the regression linearly, and
-            categorical covariates are expanded to dummy variables.
-
-    Returns:
-        statsmodels.base.model.Results: The fitted model.
-
-    """
-    outcome_name = data_info["outcome"]
-    outcome_name_numerical = data_info["outcome_numerical"]
-    feature_names = list(set(data.columns) - {outcome_name, outcome_name_numerical})
-
-    if model_type == "linear":
-        # smf.logit expects the binary outcome to be numerical
-        formula = f"{outcome_name_numerical} ~ " + " + ".join(feature_names)
-    else:
-        message = "Only 'linear' model_type is supported right now."
-        raise ValueError(message)
-
-    return smf.logit(formula, data=data).fit()
+from statsmodels.tsa.seasonal import seasonal_decompose
 
 
 def load_model(path):
@@ -52,3 +18,101 @@ def load_model(path):
 
     """
     return load_pickle(path)
+
+
+def decompose_time_series_data(data):
+    """Decompose time series data into trend seasonality and residuals.
+
+    Args:
+        data (pandas.DataFrame): The data set.
+
+    Returns:
+        statsmodels.tsa.seasonal.DecomposeResult: The decomposition of input data.
+
+    """
+    decomposed_data = seasonal_decompose(data.consumption, model="additive", period=7)
+
+    return decomposed_data
+
+
+def critical_thresholds(data, confidence_levels=[0.95]):
+    """Calculate critical threshold values to find outliers of the data.
+
+    Args:
+        data (statsmodels.tsa.seasonal.DecomposeResult): The decomposed input data
+        confidence_levels (list) : The condfidence levels to find critical values.
+
+    Returns:
+        list: The critical threshold values for specified confidence levels, in the order of all upper levels and all lower levels
+
+    """
+    data = data.resid
+    upper_thresholds = (1 - np.array(confidence_levels)) / 2
+    lower_thresholds = 1 - upper_thresholds
+    thresholds = np.append(upper_thresholds, lower_thresholds)
+
+    ci_vals = [st.norm.ppf(i) for i in thresholds]
+
+    critical_vals = 0 + data.std() * np.array(ci_vals)
+    critical_vals = critical_vals.tolist()
+
+    return critical_vals
+
+
+def outlier_finder(core_data, decomposed_data, critical_values):
+    """Locate outlier data points in core data.
+
+    Args:
+        core_data (pandas.DataFrame): The main data set.
+        decomposed_data (pandas.DataFrame): The decomposed data that contains residuals which outlier decider works on.
+        critical_values (list): The threshold values to decide the outlier bounds.
+
+    Returns:
+        pandas.DataFrame: The outlier core data points
+
+    """
+    data = core_data
+    residuals = decomposed_data.resid
+    thresholds = critical_values
+
+    outliers = pd.DataFrame(
+        data[(residuals < thresholds[0]) | (residuals > thresholds[1])],
+    )
+
+    return outliers
+
+
+def weekday_mean_calculator(data):
+    """Calculate weekday means of data.
+
+    Args:
+        data (pandas.DataFrame): The data set.
+
+    Returns:
+        pandas.DataFrame: The weekday means of data
+
+    """
+    day_means = data.groupby("weekday").mean(numeric_only=True)
+
+    return day_means
+
+
+def consumption_outlier_smoother(data, outliers_data, smoothing_data):
+    """Smooth data at hand with given smoother values.
+
+    Args:
+        data (pandas.DataFrame): The data set.
+        outliers_data (pandas.core.frame.DataFrame): outliers data set.
+        smoothing_data (pandas.DataFrame): The smoothing data set.
+
+    Returns:
+        pandas.DataFrame: The smoothed data.
+
+    """
+    for i in outliers_data.index:
+        data.loc[i, "consumption"] = smoothing_data.loc[
+            data.loc[i, "weekday"],
+            "consumption",
+        ]
+
+    return data
