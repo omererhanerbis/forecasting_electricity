@@ -32,10 +32,12 @@ from forecasti_electricity.utilities import read_yaml
 )
 def task_operatetable_data_python(depends_on, produces):
     """Conform the data to the structure to perform python operations."""
-    data_info = read_yaml(depends_on["e_data_info"])
+    data_info = read_yaml(depends_on["data_info"])
     data = pd.read_csv(depends_on["electricity_data"], skiprows=[1])
     data = clean_data(data, data_info)
     data = manipulate_data(data)
+    hourly_data = data
+    hourly_data.to_csv(produces["hourly"], index=False)
     daily_data = daily_conversion(data)
     daily_data = weekday_feature_adder(daily_data)
     daily_data.to_csv(produces["daily"], index=True)
