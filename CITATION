@@ -1,0 +1,6 @@
+@Unpublished{forecasti_electricity2023,
+    Title  = {A project for modeling and forecasting electricity consumption in Turkey},
+    Author = {Omer Erhan Erbis},
+    Year   = {2023},
+    Url    = {https://github.com/omererhanerbis/forecasti_electricity}
+}

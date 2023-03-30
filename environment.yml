@@ -1,0 +1,33 @@
+---
+name: electricity_forecast
+channels: [conda-forge, r, nodefaults]
+dependencies:
+  - r-plyr
+  - conda-lock
+  - ipykernel
+  - jupyterlab
+  - pandas
+  - pdbpp
+  - phantomjs
+  - pip >=21.1
+  - plotly>=5.13.0
+  - pre-commit
+  - pytask-latex
+  - pytask-parallel
+  - pytask-r
+  - pytask>=0.2
+  - pytest
+  - pytest-cov
+  - pytest-xdist
+  - python-graphviz
+  - python=3.11
+  - pyyaml
+  - r-plotly
+  - r-reshape2
+  - r-reticulate
+  - r-webshot
+  - r-xtable
+  - setuptools_scm
+  - statsmodels
+  - toml
+  - pip: [-e ., kaleido]
