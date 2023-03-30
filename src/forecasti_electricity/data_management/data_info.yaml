@@ -7,3 +7,4 @@ column_rename_mapping:
   Date: date
   Hour: hour
   Consumption (MWh): consumption
+
