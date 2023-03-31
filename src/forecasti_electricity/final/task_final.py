@@ -4,7 +4,7 @@ import pandas as pd
 import pytask
 
 from forecasti_electricity.config import BLD, SRC
-from forecasti_electricity.final import (
+from forecasti_electricity.final.plot import (
     plot_autocorrelations,
     plot_consumption,
     plot_decomposition,

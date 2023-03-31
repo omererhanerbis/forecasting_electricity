@@ -82,8 +82,13 @@
 \section{Introduction} % (fold)
 \label{sec:introduction}
 
+\subsection{Problem Description}
+\label{subsec:problem}
+
+\begin{comment}
 If you are using this template, please cite this item from the references:
 \citet{GaudeckerEconProjectTemplates}.
+\end{comment}
 
 Energy is a core resource in the current civilization of humanity. Ever since the Industrial Revolution, energy became more and more important as time went by, and this trend is still the same and will be the same for the foreseeable future. The importance energy attained in today’s world is immeasurable, therefore the field receives a solid attraction from both industrial organizations, applied sciences field workers and theoretical researchers.
 The attraction can be divided into two separate yet highly connected sides of the energy sector, named production and consumption sides. Since the demand is the reason supply is created and supply impacts demand in variaous ways such as prices, they are highly connected. Since this connection also determines main dynamics in the system, both sides require a detailed overlook of the other to reach correct and meaningful results in their analyses.
@@ -97,6 +102,30 @@ This is important for production facilities due to several reasons:
 \end{itemize}
 
 These adversities and inefficiencies created by the insufficient or excess production are severe problems. However, due to some controllable energy production processes and via correct assessment of consumption demands, many of these are prevented nowadays. This project also plans to correctly estimate a type of energy, electricity consumption demand values due to the reasons above to create an opportunity to reach optimal energy production values in Turkey.
+
+
+
+
+
+% section introduction (end)
+
+
+\subsection{Proposed Approach}
+\label{subsec:propapp}
+
+To correctly forecast and to enable producers decide more accurate production amounts, I utilized the electricity consumption dataset available on EPIAS platform up to the present day. Available data is set to be searched by the computer statistical analysis methods, and via learned information the correct consumption values are expected to be estimated for future periods.
+Many statistical data analysis models exist and they may provide different values with different fitted models with different accuracies. Therefore, the data is divided into train and test intervals as it is the norm in any data analysis conducted.
+Due to the scope of the project and signals from literature research, I decided to run statistical model analysis methods to setup the model.
+The data at hand is hourly dataset. However, daily feature of the dataset is deemed to be better reliable for model setup, thus is going to be selected.
+In the model training, fluctiations and diversions from the norms are to be investigated via outlier analysis.
+The model fit will be checked on with test interval values and a number of performance functions will be inspected.
+
+\subsection{Descriptive Analysis}
+\label{subsec:descanalys}
+
+The data source provides hourly electricity consumption values of Turkey from 2017 Jan 01.
+
+In order to have a visual inspection, it is optimal to visualize both the original hourly and updated daily data sets. However, continuing onwards, only daily inspections will be conducted due to chosen frequency being daily in this project.
 
 \begin{figure}[H]
 
@@ -120,8 +149,70 @@ These adversities and inefficiencies created by the insufficient or excess produ
 \end{figure}
 
 
+Now, the autocorrelation and partial autocorrelation functions will be checked to see the process the data is in to have an idea of stationarity reaching processes.
 
-% section introduction (end)
+\begin{figure}[H]
+
+    \centering
+    \includegraphics[width=0.85\textwidth]{../python/figures/autocorrelations}
+
+    \caption{Autocorrelation Functions}
+    \label{fig:hourly_consumption}
+
+\end{figure}
+
+It can be seen that there are significant correlation numbers for 7th lags, which corresponds to weekly
+
+
+
+\subsection{Challenges}
+\label{subsec:chall}
+
+The time-series data is hard to deal with, due to many processes affecting the data at hand. This will inevitably cause errors in the modelling and forecast performance.
+
+Finding important features to control for outliers and reach stationarity is difficult due to frequency being daily and features related being qualitative and unavailable mostly.
+COVID-19 period causes significant diversions from historical trends, thus handling this period is quite difficult with measures not being recorded collectively causing significant noise.
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Literature Review} % (fold)
+\label{sec:litrew}
+
+Therefore literature revolves around various analysis models and tries to cope up with the qualities that make the predictions inaccurate. The electricity consumption data demonstrates non-linear, stochastic and time-variant patterns that makes its analysis hard and predictions to be inaccurate (Li and Zhang, 1). Therefore, approaches to analyse and forecast the electricity consumption are separated into three main dimensions: Statistical Analysis Models, Computational Intelligence Models and Grey Prediction Models (Li and Zhang, 2).
+Statistical Analysis Models include classic and logistic regression models, time-series models (e.g. ARIMA) and Markov chain models. These models are very reliable models since some are especially designed to cope up with time-series data but have little shortcomings. With the data at hand being in a sufficient amount with required statistical qualities and with choosing accurate external regressors, these models have high accuracy in the literature (Li and Zhang, 2). They are also very popular models in the use due having various applications that are suitable for many time-series data.
+Computational Intelligence Models are composed of highly-advanced Support Vector Machine Regression (SVM) systems and neural-network (NN) systems with variaous extension and derivatives. These are very popular in advanced machine-learning analyses with advanced applications.
+Grey Prediction Models are in the middle of black-box and white-box models that aims for a better analysis and prediction. It uses data to complete the partial knowledge of theoretical structure to reach a better model via combination of both theory and realizations (using data). They are also very popular in some cases as the assumption of the model is logical but they are hard to implement. The model assumptions also conform many qualities of electricity consumption data and forecasting, therefore being popular in this field as well.
+First of all, energy consumption demand investigations and forecasts existed since mid 1900s with the initiative of State Planning Organization, and Ministry of Energy and Natural Resources have continued those efforts developing Model of Analysis of the Energy Demand (MAED) at the end (Ediger, Akar). This model is also said to be currently used effectively for forecasting electricity consumption demand. Of course separate models and approaches followed these with other interested parties’ active involvement in the studies.
+Ediger, Akar (2006) worked on energy consumption demand and found ARIMA model forecasts to be the most reliable model amongst other individual model forecasts they compared. They deemed ARIMA model to be efficiently usable approach in energy consumption forecasts.
+
+
+
+
+
+
+
+
+\section{Approach} % (fold)
+\label{sec:appro}
+
+In the light of these previous work, this project will solely rely on ARIMA modelling and forecasting.
+The outlier analysis plays a crucial role in this setup. Thus, the data will be decomposed into trend, seasonality and residuals parts to better observe the state and determine the outliers.
+The outlier handing is difficult. There are two main ways to deal with outliers. First is the smoothing the extreme points to make the model more reliable. This approach will lose valuable information but significantly improve the data process and allow for better prediction. The second is the use of external variables to account for fluctiations. However, this poses the data availability issue to deal with, and even found data may need interpolation or extrapolation for frequency matching that again will cause serious fitting issues, the most basic being the feature to reduce to non-important status.
+
+
+
+
+
+
 
 
 
