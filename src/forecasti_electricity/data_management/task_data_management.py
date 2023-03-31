@@ -5,6 +5,7 @@ import pandas as pd
 import pytask
 
 from forecasti_electricity.config import BLD, SRC
+from forecasti_electricity.data_management.create_features import sunlight_data
 from forecasti_electricity.data_management.restructure_data import (
     clean_data,
     daily_conversion,
@@ -114,3 +115,11 @@ def task_train_test_divider(depends_on, produces):
     test_features.to_csv(produces["test_features"], index=False)
     train_dependent.to_csv(produces["train_dependent"], index=False)
     test_dependent.to_csv(produces["test_dependent"], index=False)
+
+
+@pytask.mark.produces(BLD / "python" / "data" / "sunlight_data.csv")
+def task_sunlight_data(produces):
+    """Request and calculate sunlight time from prayer times API."""
+    sunlight = sunlight_data()
+    sunlight = sunlight.drop(["sunrise", "sunset"], axis=1)
+    sunlight.to_csv(produces, index=False)

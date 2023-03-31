@@ -16,6 +16,28 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage{subcaption}
 \usepackage{minibox}
+\usepackage{fancyvrb}
+\usepackage{geometry}
+
+\geometry{left=2cm, top=2cm, right=2cm, bottom=2cm, footskip=1cm}
+
+% redefine \VerbatimInput
+\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}%
+{fontsize=\footnotesize,
+ %
+ frame=lines,  % top and bottom rule only
+ framesep=2em, % separation between frame and text
+ rulecolor=\color{Gray},
+ %
+ label=\fbox{\color{Black}data.txt},
+ labelposition=topline,
+ %
+ commandchars=\|\(\), % escape character and argument delimiters for
+                      % commands within the verbatim
+ commentchar=*        % comment character
+}
+
+
 % \usepackage{pdf14} % Enable for Manuscriptcentral -- can't handle pdf 1.5
 % \usepackage{endfloat} % Enable to move tables / figures to the end. Useful for some
 % submissions.
@@ -64,7 +86,7 @@
 \author{Omer Erhan Erbis}
 
 \date{
-    {\bf Preliminary -- please do not quote}
+    {\bf 31 March 2023}
     \\[1ex]
     \today
 }
@@ -73,7 +95,7 @@
 
 
 \begin{abstract}
-    Some abstract here.
+    This project aims to investigate Real-Time Electricity Consumption of Turkey, model it and provide 7-day forecast that are useful for industry who wants to optimize due to inefficient mostly non-storable nature of high amounts of electricity. The use of ARIMA model provides very helpful as literature also deems and with appropriate features the model fit and forecasts significantly improve. However, it effectively remains open to be further fine-tuned and developed to construct better model fits and forecasts.
 \end{abstract}
 
 \clearpage
@@ -183,7 +205,7 @@ COVID-19 period causes significant diversions from historical trends, thus handl
 
 
 
-
+\pagebreak
 \section{Literature Review} % (fold)
 \label{sec:litrew}
 
@@ -197,7 +219,12 @@ Ediger, Akar (2006) worked on energy consumption demand and found ARIMA model fo
 
 
 
+\pagebreak
+\section{Data} % (fold)
+\label{sec:data}
 
+The data used in this project is mainly utilizing Energy Exchange Istanbul EXIST or Enerji Piyasalari Isletme A.S. EPIAS data source. EXIST offers the Transparency Platform to public to the extent of hourly frequency of energy related data. The data utilized here is hourly real-time electricity consumption, which is provided in the project file, can be accessed \href{https://seffaflik.epias.com.tr/transparency/index.xhtml}{here.}
+The features used in the project are USD to TRY exchange rate and sunlight time for a day. The exchange rate data can be accessed from Yahoo Finance, provided as downloaded in this project, or from simply reaching \href{https://finance.yahoo.com/quote/USDTRY%3DX/history?period1=1483228800&period2=1677542400&interval=1d&filter=history&frequency=1d&includeAdjustedClose=true}{here.} Additionally, the sunlight data is obtained from Aladhan prayer times API by calculating difference between sunset and sunrise times, and the API can be accessed \href{https://aladhan.com/prayer-times-api}{here.}
 
 
 
@@ -257,13 +284,13 @@ As can be seen, this method loses some information but enables the analysis to g
 The results can always be improved with extra features, and to tap into this, I will use sunlight data for each day and currency exchange rate of Turkish Lira against dollar to control over some important exogeneous factors such as sunlight and energy prices as alternative energy sources and market dynamics play a highly important role in Turkey due to wide spread of sunlight batteries and energy-dependent state.
 
 
-
+\pagebreak
 \section{Analysis}
 \label{sec:Anlys}
 
 The results of the naive ARIMA model without any features can be seen from the following trained model results:
 
-\begin{table}[!h]
+\begin{table}[!htbp]
     \input{../python/tables/naive_arima_model.tex}
     \caption{\label{tab:python-summary} Naive Arima Model Fit Results}
 \end{table}
@@ -272,16 +299,49 @@ The results of the naive ARIMA model without any features can be seen from the f
 As it can be seen, the model fits nicely but there remains an opportunity for more in-depth model analysis with additional features. Thus, additional featured ARIMA model will also be conducted on the collected data to obtain another model in hopes to improve fit and obtain better forecasts.
 
 
-\begin{table}[!h]
+\begin{table}
     \input{../python/tables/featured_arima_model.tex}
     \caption{\label{tab:python-summary} Featured Arima Model Fit Results}
 \end{table}
 
-To be continued.
+\pagebreak
+\section{Performances}
+\label{sec:Perf}
+
+The performance of the naive ARIMA forecast can be seen from the list below.
+
+
+\begingroup
+\obeylines
+\input{../python/tables/naive_arima_performance.txt}%
+\endgroup%
+
+As you can see, the results are quite good, but there is a room of improvement due to COVID-19 period proving to be highly effective. However, data collection for COVID-19 period is very difficult and needs heavy focus to extract meaningful information.
+
+Similarly, the featured ARIMA forecast performance can be inspected in the following.
+
+\begingroup
+\obeylines
+\input{../python/tables/featured_arima_performance.txt}%
+\endgroup%
+
+The features did not explain big variations of the data, but this does not reduce their importance. Other important measures' inclusion very well highlight the importance of these features, but it is apparent to say that the noisy nature of the data is still present.
+
+The scores of around only 1 percent error for 7-day daily consumption forecasting is very strong
+
+Time-series quality of the data is hard to deal with due to time mismatch and requirement of working with forecasts of external regressors are necessary, resulting in unavoidable forecast errors. The forecast are to be improved by time due to possible extended availability of feature data. Improvements to results can be investigated under two main branches: data and model selection. Firstly, feature set of external regressors can be expanded to reach better precision, however one should be careful with overfitting multicollinearity feature search costs. COVID-19 pandemic proves to be highly problematic period to delve deep into for future investigations of larger scale projects.
+
+\section{Conclusion and Future Work}
+\label{sec:ConcFut}
+
+
+This project looked into Turkey's real-time electricity consumption demand to obtain patterns and reach accurate forecasts for a better insigth that will lead more optimal production decisions. The time-series data was subject to both visual and analytical inspection. The data was explored, and literature-standard ARIMA model was utilized in naive model. To improve on these, some economically logical and available features were collected and featured ARIMA model has been run. Although the fit struggles a bit to capture the variations in both models, the forecasts return strong performance and favourable leads for industry.
+
 
 \setstretch{1}
 \printbibliography
 \setstretch{1.5}
+
 
 
 % \appendix

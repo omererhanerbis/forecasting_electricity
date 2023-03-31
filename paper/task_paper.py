@@ -2,10 +2,10 @@
 import shutil
 
 import pytask
-from pytask_latex import compilation_steps as cs
 from forecasti_electricity.config import BLD, PAPER_DIR
+from pytask_latex import compilation_steps as cs
 
-documents = ["forecasti_electricity", "forecasti_electricity_pres"]
+documents = ["forecasti_electricity"]
 
 for document in documents:
 

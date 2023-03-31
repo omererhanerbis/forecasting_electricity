@@ -15,10 +15,15 @@ from forecasti_electricity.analysis.model import (
 
 
 def plot_consumption(data, data_info):
-    """Plot regression results by age.
+    """Plot consumption data.
 
     Args:
         data (pandas.DataFrame): The data set.
+        data_info (dict): Information on data set stored in data_info.yaml. The
+            following keys can be accessed:
+            - 'column_rename_mapping': Old and new names of columns to be renamend,
+                stored in a dictionary with design: {'old_name': 'new_name'}
+            - 'url': URL to data set
 
     Returns:
         plotly.graph_objects.Figure: The figure.
@@ -33,10 +38,15 @@ def plot_consumption(data, data_info):
 
 
 def plot_autocorrelations(data, data_info):
-    """Plot regression results by age.
+    """Plot autocorrelation results of consumption data.
 
     Args:
         data (pandas.DataFrame): The data set.
+        data_info (dict): Information on data set stored in data_info.yaml. The
+            following keys can be accessed:
+            - 'column_rename_mapping': Old and new names of columns to be renamend,
+                stored in a dictionary with design: {'old_name': 'new_name'}
+            - 'url': URL to data set
 
     Returns:
         plotly.graph_objects.Figure: The figure.
@@ -63,6 +73,11 @@ def plot_decomposition(data, data_info):
 
     Args:
         data (pandas.DataFrame): The data set.
+        data_info (dict): Information on data set stored in data_info.yaml. The
+            following keys can be accessed:
+            - 'column_rename_mapping': Old and new names of columns to be renamend,
+                stored in a dictionary with design: {'old_name': 'new_name'}
+            - 'url': URL to data set
 
     Returns:
         plotly.graph_objects.Figure: The figure.
@@ -91,6 +106,11 @@ def plot_outlier_analysis(data, data_info, confidence_levels=[0.90, 0.95, 0.99])
 
     Args:
         data (pandas.DataFrame): The data set.
+        data_info (dict): Information on data set stored in data_info.yaml. The
+            following keys can be accessed:
+            - 'column_rename_mapping': Old and new names of columns to be renamend,
+                stored in a dictionary with design: {'old_name': 'new_name'}
+            - 'url': URL to data set
         confidence_levels (list): The pre-determined confidence levels of interest
 
     Returns:
@@ -125,6 +145,11 @@ def plot_smoothed(data, data_info):
 
     Args:
         data (pandas.DataFrame): The data set.
+        data_info (dict): Information on data set stored in data_info.yaml. The
+            following keys can be accessed:
+            - 'column_rename_mapping': Old and new names of columns to be renamend,
+                stored in a dictionary with design: {'old_name': 'new_name'}
+            - 'url': URL to data set
 
     Returns:
         plotly.graph_objects.Figure: The figure.

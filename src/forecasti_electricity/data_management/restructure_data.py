@@ -6,7 +6,7 @@ import pandas as pd
 
 
 def clean_data(data, data_info):
-    """Clean data set.
+    """Clean the data set by renaming columns.
 
     Information on data columns is stored in ``data_management/data_info.yaml``.
 

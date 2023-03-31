@@ -1,3 +1,4 @@
+"""Obtain data from APIs."""
 import datetime as dt
 
 import pandas as pd
