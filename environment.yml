@@ -30,4 +30,7 @@ dependencies:
   - setuptools_scm
   - statsmodels
   - toml
+  - pmdarima
+  - matplotlib
+  - seaborn
   - pip: [-e ., kaleido]

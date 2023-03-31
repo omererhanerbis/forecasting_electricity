@@ -1,8 +1,9 @@
 """Function(s) for cleaning, restructuring and manipulating the data set(s)."""
 
 import datetime as dt
+
 import pandas as pd
-import requests
+
 
 def clean_data(data, data_info):
     """Clean data set.
@@ -24,9 +25,8 @@ def clean_data(data, data_info):
     data = data.dropna()
     data = data.rename(columns=data_info["column_rename_mapping"])
 
-
-
     return data
+
 
 def manipulate_data(data):
     """Manipulate the data and adjust the format of date and inputs for operations.
@@ -39,15 +39,15 @@ def manipulate_data(data):
 
     """
     data.date = data.date.apply(lambda x: dt.datetime.strptime(x, "%d.%m.%Y"), 1)
-    data.consumption = data.consumption.apply(lambda x: x.replace(".", "").replace(",", ".")).astype(float)
-
-
+    data.consumption = data.consumption.apply(
+        lambda x: x.replace(".", "").replace(",", "."),
+    ).astype(float)
 
     return data
 
+
 def daily_conversion(data):
     """Convert hourly bulk data to daily data.
-
 
     Args:
         data (pandas.DataFrame): The data set.
@@ -56,16 +56,13 @@ def daily_conversion(data):
         pandas.DataFrame: The restructured data set.
 
     """
-    data = pd.DataFrame(data.groupby(by = "date").consumption.sum())
-
-
+    data = pd.DataFrame(data.groupby(by="date").consumption.sum())
 
     return data
 
 
 def weekday_feature_adder(data):
     """Add weekday feature to data.
-
 
     Args:
         data (pandas.DataFrame): The data set.
@@ -74,8 +71,9 @@ def weekday_feature_adder(data):
         pandas.DataFrame: The updated data set.
 
     """
-    data["weekday"] = data.index.weekday
-
-
+    data["weekday"] = data.date.apply(
+        lambda x: dt.datetime.strptime(x, "%Y-%m-%d").weekday(),
+        1,
+    )
 
     return data

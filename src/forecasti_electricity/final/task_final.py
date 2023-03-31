@@ -3,6 +3,7 @@
 import pandas as pd
 import pytask
 
+from forecasti_electricity.analysis.model import load_model
 from forecasti_electricity.config import BLD, SRC
 from forecasti_electricity.final.plot import (
     plot_autocorrelations,
@@ -103,3 +104,13 @@ def task_plot_naive_handled_decomposition(depends_on, produces):
     data = pd.read_csv(depends_on["data"])
     fig = plot_smoothed(data, data_info)
     fig.savefig(produces)
+
+
+@pytask.mark.depends_on(BLD / "python" / "models" / "naive_arima_model.pickle")
+@pytask.mark.produces(BLD / "python" / "tables" / "naive_arima_model.tex")
+def task_create_results_table_python(depends_on, produces):
+    """Store a table in LaTeX format with the estimation results (Python version)."""
+    model = load_model(depends_on)
+    table = model.summary().as_latex()
+    with open(produces, "w") as f:
+        f.writelines(table)

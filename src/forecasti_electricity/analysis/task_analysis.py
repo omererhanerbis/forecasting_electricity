@@ -26,7 +26,7 @@ from forecasti_electricity.utilities import read_yaml
 @pytask.mark.depends_on(
     {
         "scripts": ["model.py", "predict.py"],
-        "data": BLD / "python" / "data" / "daily_data_clean.csv",
+        "data": BLD / "python" / "data" / "train_dependent.csv",
         "data_info": SRC / "data_management" / "data_info.yaml",
     },
 )
@@ -60,7 +60,7 @@ def task_fit_naive_arima_model(depends_on, produces):
 @pytask.mark.depends_on(
     {
         "scripts": ["model.py", "predict.py"],
-        "data": BLD / "python" / "data" / "daily_data_clean.csv",
+        "data": BLD / "python" / "data" / "train_dependent.csv",
         "model": BLD / "python" / "models" / "naive_arima_model.pickle",
     },
 )

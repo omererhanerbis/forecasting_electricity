@@ -6,6 +6,10 @@ import scipy.stats as st
 from statsmodels.iolib.smpickle import load_pickle
 from statsmodels.tsa.seasonal import seasonal_decompose
 
+from forecasti_electricity.data_management.restructure_data import (
+    weekday_feature_adder,
+)
+
 
 def load_model(path):
     """Load statsmodels model.
@@ -92,6 +96,7 @@ def weekday_mean_calculator(data):
         pandas.DataFrame: The weekday means of data
 
     """
+    data = weekday_feature_adder(data)
     day_means = data.groupby("weekday").mean(numeric_only=True)
 
     return day_means
@@ -109,6 +114,7 @@ def consumption_outlier_smoother(data, outliers_data, smoothing_data):
         pandas.DataFrame: The smoothed data.
 
     """
+    data = weekday_feature_adder(data)
     for i in outliers_data.index:
         data.loc[i, "consumption"] = smoothing_data.loc[
             data.loc[i, "weekday"],
