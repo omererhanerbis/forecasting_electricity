@@ -85,58 +85,39 @@
 If you are using this template, please cite this item from the references:
 \citet{GaudeckerEconProjectTemplates}.
 
-The data set for the example project is taken from
-\url{https://www.stem.org.uk/resources/elibrary/resource/28452/large-datasets-stats4schools}.
-It contains data on smoking habits in the UK, with 1691 observations and 12 variables.
-We consider only 4 of the 12 features for the prediction of the variable
-\texttt{smoking}: \texttt{marital\_status}, \texttt{highest\_qualification},
-\texttt{gender} and \texttt{age}. We model the dependence using a Logistic model. All
-numerical features are included linearly, while categorical features are expanded into
-dummy variables. Figures below illustrate the model predictions over the lifetime. You
-will find one figure and one estimation summary table for each installed programming
-language.
+Energy is a core resource in the current civilization of humanity. Ever since the Industrial Revolution, energy became more and more important as time went by, and this trend is still the same and will be the same for the foreseeable future. The importance energy attained in today’s world is immeasurable, therefore the field receives a solid attraction from both industrial organizations, applied sciences field workers and theoretical researchers.
+The attraction can be divided into two separate yet highly connected sides of the energy sector, named production and consumption sides. Since the demand is the reason supply is created and supply impacts demand in variaous ways such as prices, they are highly connected. Since this connection also determines main dynamics in the system, both sides require a detailed overlook of the other to reach correct and meaningful results in their analyses.
+In this applied research project, our aim is to predict (electricity) consumption demand of the (Turkey)society. The reason behind this aim is to create an accurate forecast of consumption demand values for some future interval that will actually determine the production facilities periodical choices and energy output amounts.
+This is important for production facilities due to several reasons:
 
+\begin{itemize}
+    \item Insufficient energy production that falls short of the energy consumption demand will cause energy shortages, inefficient supply of energy for some energy-dependent processes, local power outages in severe cases. These may cause inefficiencies and direct or indirect harms to society (i.e. deaths in intense care units due to no power supply) and world (inefficient utilization of energy may cause more natural resource use to reach target goals that may lead natural resource depletion).
+    \item Excess energy production over normal demand is needed to be utilized, if possible. There exists some processes and facilities that this energy can be utilized in various ways, but due to these being not necessary, they ask for a reduced price from energy producers, to bear the consequences of their over-production. Likewise, if there is a shortage in terms of supplying the electricity by the distributor companies, these companies have to satisfy this demand by paying for a over-price from energy producers.
+    \item Energy is not a storable resource in large amounts due to the nature of energy (also, electricity). This causes the excess supply of demand to be a waste of precious resources, if not utilized in any way. In some cases, this is done via grid frequency increases or energy dumping into meaningless circuits, both causing higher heat dissipation (possible harm to global ecosystem).
+\end{itemize}
+
+These adversities and inefficiencies created by the insufficient or excess production are severe problems. However, due to some controllable energy production processes and via correct assessment of consumption demands, many of these are prevented nowadays. This project also plans to correctly estimate a type of energy, electricity consumption demand values due to the reasons above to create an opportunity to reach optimal energy production values in Turkey.
+
+\begin{figure}[H]
+
+    \centering
+    \includegraphics[width=0.85\textwidth]{../python/figures/hourly_consumption}
+
+    \caption{Hourly Consumption Data}
+    \label{fig:hourly_consumption}
+
+\end{figure}
 
 
 \begin{figure}[H]
 
     \centering
-    \includegraphics[width=0.85\textwidth]{../python/figures/smoking_by_marital_status}
+    \includegraphics[width=0.85\textwidth]{../python/figures/daily_consumption}
 
-    \caption{\emph{Python:} Model predictions of the smoking probability over the
-        lifetime. Each colored line represents a case where marital status is fixed to one
-        of the values present in the data set.}
-    \label{fig:python-predictions}
+    \caption{Daily Consumption Data}
+    \label{fig:hourly_consumption}
 
 \end{figure}
-
-
-\begin{table}[!h]
-    \input{../python/tables/estimation_results.tex}
-    \caption{\label{tab:python-summary}\emph{Python:} Estimation results of the
-        linear Logistic regression.}
-\end{table}
-
-
-
-
-\begin{figure}[H]
-
-    \centering
-    \includegraphics[width=0.85\textwidth]{../r/figures/smoking_by_marital_status}
-
-    \caption{\emph{R:} Model predictions of the smoking probability over
-        the lifetime. Each colored line represents a case where marital status
-        is fixed to one of the values present in the data set.}
-    \label{fig:r-predictions}
-
-\end{figure}
-
-\input{../r/tables/estimation_results.tex}
-\begin{center}
-    Table 2. \emph{R:} Estimation results of the
-    linear Logistic regression.
-\end{center}
 
 
 
