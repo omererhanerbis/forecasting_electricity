@@ -1,0 +1,27 @@
+Li, Kai & Zhang, Tao. (2018). Forecasting Electricity Consumption Using an Improved Grey Prediction Model. Information. 9. 204. 10.3390/info9080204.
+
+Ediger, Volkan & Akar, Sertac. (2007). ARIMA forecasting of primary energy demand by fuel in Turkey. Energy Policy. 35. 1701-1708. 10.1016/j.enpol.2006.05.009.
+
+Kaytez, Fazil & Taplamacioglu, M. & Çam, Ertuğrul & Hardalaç, Firat. (2015). Forecasting electricity consumption: A comparison of regression analysis, neural networks and least squares support vector machines. International Journal of Electrical Power & Energy Systems. 67. 10.1016/j.ijepes.2014.12.036.
+
+Tureczek, Alexander. (2017). Structured Literature Review of Electricity Consumption Classification Using Smart Meter Data. Energies. 10. 584. 10.3390/en10050584.
+
+Gamze Oğcu, Omer F. Demirel, Selim Zaim, Forecasting Electricity Consumption with Neural Networks and Support Vector Regression, Procedia - Social and Behavioral Sciences, Volume 58, 2012, Pages 1576-1585, ISSN 1877-0428, https://doi.org/10.1016/j.sbspro.2012.09.1144.
+
+P. Ozoh, S. Abd-Rahman and J. Labadin, "Predicting electricity consumption: A comparative analysis of the accuracy of various computational techniques," 2015 9th International Conference on IT in Asia (CITA), Sarawak, Malaysia, 2015, pp. 1-7, doi: 10.1109/CITA.2015.7349819.
+
+M. Bouzerdoum, A. Mellit, A. Massi Pavan, A hybrid model (SARIMA–SVM) for short-term power forecasting of a small-scale grid-connected photovoltaic plant, Solar Energy, Volume 98, Part C, 2013, Pages 226-235, ISSN 0038-092X, https://doi.org/10.1016/j.solener.2013.10.002.
+
+Şahin, U . "FORECASTING OF TURKEY’S ELECTRICITY GENERATION AND CONSUMPTION WITH GREY PREDICTION METHOD" . Mugla Journal of Science and Technology 4 (2018): 205-209 <https://dergipark.org.tr/en/pub/muglajsci/issue/39930/450307>
+
+Zaid Mohamed, Pat Bodger,Forecasting electricity consumption in New Zealand using economic and demographic variables, Energy, Volume 30, Issue 10, 2005, Pages 1833-1843, ISSN 0360-5442, https://doi.org/10.1016/j.energy.2004.08.012.
+
+Wang, Fei et al. “Residential Electricity Consumption Level Impact Factor Analysis Based on Wrapper Feature Selection and Multinomial Logistic Regression.” Energies 11.5 (2018): 1180, https://doi.org/10.3390/en11051180.
+
+Weigang Zhao, Jianzhou Wang, Haiyan Lu, Combining forecasts of electricity consumption in China with time-varying weights updated by a high-order Markov chain model, Omega, Volume 45, 2014, Pages 80-91, ISSN 0305-0483, https://doi.org/10.1016/j.omega.2014.01.002.
+
+Kaynar, Oguz & Ozekicioglu, Halil & Demirkoparan, Ferhan. (2017). Forecasting of Turkey's Electricity Consumption with Support Vector Regression and Chaotic Particle Swarm Algorithm. 15. 211-224.
+
+Murat Kankal, Adem Akpınar, Murat İhsan Kömürcü, Talat Şükrü Özşahin, Modeling and forecasting of Turkey’s energy consumption using socio-economic and demographic variables, Applied Energy, Volume 88, Issue 5, 2011, Pages 1927-1939, ISSN 0306-2619, https://doi.org/10.1016/j.apenergy.2010.12.005.
+
+Bilal ŞİŞMAN .A COMPARISON OF ARIMA AND GREY MODELS FOR ELECTRICITY CONSUMPTION DEMAND FORECASTING: THE CASE OF TURKEY. Kastamonu Üniversitesi İktisadi ve İdari Bilimler Fakültesi Dergisi (2016).
