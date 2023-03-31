@@ -114,3 +114,13 @@ def task_create_results_table_python(depends_on, produces):
     table = model.summary().as_latex()
     with open(produces, "w") as f:
         f.writelines(table)
+
+
+@pytask.mark.depends_on(BLD / "python" / "models" / "featured_arima_model.pickle")
+@pytask.mark.produces(BLD / "python" / "tables" / "featured_arima_model.tex")
+def task_create_results_table_python(depends_on, produces):
+    """Store a table in LaTeX format with the estimation results (Python version)."""
+    model = load_model(depends_on)
+    table = model.summary().as_latex()
+    with open(produces, "w") as f:
+        f.writelines(table)

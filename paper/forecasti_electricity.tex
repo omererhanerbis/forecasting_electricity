@@ -205,21 +205,13 @@ Ediger, Akar (2006) worked on energy consumption demand and found ARIMA model fo
 \label{sec:appro}
 
 In the light of these previous work, this project will solely rely on ARIMA modelling and forecasting.
+
+
+\subsection{Outlier Analysis and Features}
+\label{subsec:outlanaly}
+
+
 The outlier analysis plays a crucial role in this setup. Thus, the data will be decomposed into trend, seasonality and residuals parts to better observe the state and determine the outliers.
-The outlier handing is difficult. There are two main ways to deal with outliers. First is the smoothing the extreme points to make the model more reliable. This approach will lose valuable information but significantly improve the data process and allow for better prediction. The second is the use of external variables to account for fluctiations. However, this poses the data availability issue to deal with, and even found data may need interpolation or extrapolation for frequency matching that again will cause serious fitting issues, the most basic being the feature to reduce to non-important status.
-
-
-
-
-\begin{figure}[H]
-
-    \centering
-    \includegraphics[width=0.85\textwidth]{../python/figures/naive_handled_decomposition}
-
-    \caption{Decomposition of Naive-Smoothed Data}
-    \label{fig:daily_consumption}
-
-\end{figure}
 
 
 \begin{figure}[H]
@@ -233,6 +225,11 @@ The outlier handing is difficult. There are two main ways to deal with outliers.
 \end{figure}
 
 
+The outlier handing is difficult. There are two main ways to deal with outliers. First is the smoothing the extreme points to make the model more reliable. This approach will lose valuable information but significantly improve the data process and allow for better prediction. The second is the use of external variables to account for fluctiations. However, this poses the data availability issue to deal with, and even found data may need interpolation or extrapolation for frequency matching that again will cause serious fitting issues, the most basic being the feature to reduce to non-important status.
+
+
+The critical levels of 90, 95 and 99 percent for outliers can be observed in the following graph.
+
 \begin{figure}[H]
 
     \centering
@@ -243,7 +240,28 @@ The outlier handing is difficult. There are two main ways to deal with outliers.
 
 \end{figure}
 
+In this project, due to aforementioned difficulties and concerns, mild outlier smoothing will be done by taking 95\% confidence interval around expected 0 mean residuals and the outlier dates will be smoothed out by their weekly average values for their daily electricity consumption values.
 
+
+\begin{figure}[H]
+
+    \centering
+    \includegraphics[width=0.85\textwidth]{../python/figures/naive_handled_decomposition}
+
+    \caption{Decomposition of Naive-Smoothed Data}
+    \label{fig:daily_consumption}
+
+\end{figure}
+
+As can be seen, this method loses some information but enables the analysis to go way more smoothly due to more stationary nature of the residuals.
+The results can always be improved with extra features, and to tap into this, I will use sunlight data for each day and currency exchange rate of Turkish Lira against dollar to control over some important exogeneous factors such as sunlight and energy prices as alternative energy sources and market dynamics play a highly important role in Turkey due to wide spread of sunlight batteries and energy-dependent state.
+
+
+
+\section{Analysis}
+\label{sec:Anlys}
+
+The results of the naive ARIMA model without any features can be seen from the following trained model results:
 
 \begin{table}[!h]
     \input{../python/tables/naive_arima_model.tex}
@@ -251,10 +269,15 @@ The outlier handing is difficult. There are two main ways to deal with outliers.
 \end{table}
 
 
+As it can be seen, the model fits nicely but there remains an opportunity for more in-depth model analysis with additional features. Thus, additional featured ARIMA model will also be conducted on the collected data to obtain another model in hopes to improve fit and obtain better forecasts.
 
 
+\begin{table}[!h]
+    \input{../python/tables/featured_arima_model.tex}
+    \caption{\label{tab:python-summary} Featured Arima Model Fit Results}
+\end{table}
 
-
+To be continued.
 
 \setstretch{1}
 \printbibliography
